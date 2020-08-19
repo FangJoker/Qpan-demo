@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chavez.qpan.orm.mapper.UserMapper">
+    <select id="selectByAccount" resultType="cn.chavez.qpan.model.user.po.UserPo">
+        select uuid,phone_number,nick_name,account,password,personal_free_byte,
+        personal_total_byte
+        from user
+        where  account =#{account}
+        and
+        is_deleted = 0
+    </select>
+    <insert id="insert">
+        <selectKey keyProperty="uuid" resultType="String" order="BEFORE">
+            select replace(uuid(), '-', '') as uuid from dual
+        </selectKey>
+        insert into user (
+        uuid, phone_number, nick_name, account, password, personal_total_byte, personal_free_byte, create_time,
+        update_time
+        ) values (
+        #{uuid},
+        #{phoneNumber},
+        #{nickName},
+        #{account},
+        #{password},
+        #{personalTotalByte},
+        #{personalFreeByte},
+        DATE_FORMAT(NOW(),"%Y-%m-%d %H:%i:%S"),
+        DATE_FORMAT(NOW(),"%Y-%m-%d %H:%i:%S")
+        )
+    </insert>
+
+    <select id="selectIndividualDir" resultType="java.lang.String">
+         select dir_address
+         from user
+         where  uuid = #{uuid}
+    </select>
+
+    <update id="updateFreeBytesByUuid">
+        update  user
+        <set>
+            <if test="freeBytes!=null and freeBytes !='' ">
+                personal_free_byte = #{freeBytes},
+            </if>
+            update_time =  DATE_FORMAT(NOW(),"%Y-%m-%d %H:%i:%S")
+        </set>
+        where uuid = #{uuid}
+    </update>
+
+    <update id="updateTotalBytesByUuid">
+        update  user
+        <set>
+            <if test="TotalBytes!=null and TotalBytes !='' ">
+                personal_total_byte = #{totalBytes},
+            </if>
+            update_time =  DATE_FORMAT(NOW(),"%Y-%m-%d %H:%i:%S")
+        </set>
+        where uuid = #{uuid}
+    </update>
+
+    <select id="selectFreeBytesByUuid" resultType="java.lang.Long">
+        select personal_free_byte
+        from user
+        where uuid = #{uuid}
+    </select>
+</mapper>

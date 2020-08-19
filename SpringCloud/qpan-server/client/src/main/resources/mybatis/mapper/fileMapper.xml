@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chavez.qpan.orm.mapper.FileMapper">
+    <select id="selectFilePOByFileUuid" resultType="cn.chavez.qpan.model.file.po.FilePo">
+        select uuid,user_uuid,file_name,file_path,total_bytes,file_type,create_time,update_time,is_deleted
+        from
+        file
+        where uuid = #{uuid}
+        and is_deleted = 0
+    </select>
+
+    <insert id="insertFile">
+        <selectKey keyProperty="uuid" resultType="String" order="BEFORE">
+            select replace(uuid(), '-', '') as uuid from dual
+        </selectKey>
+        insert into file
+        (uuid,user_uuid,file_name,file_path,total_bytes,file_type,create_time,update_time)
+        values
+        (#{uuid},
+        #{userUuid},
+        #{fileName},
+        #{filePath},
+        #{totalBytes},
+        #{fileType},
+        DATE_FORMAT(NOW(),"%Y-%m-%d %H:%i:%S"),
+        DATE_FORMAT(NOW(),"%Y-%m-%d %H:%i:%S")
+        )
+    </insert>
+
+    <select id="selectFileUuidByPath" resultType="java.lang.String">
+        select uuid
+        from file
+        where file_path = #{path}
+    </select>
+
+    <select id="selectPathByUuid" resultType="java.lang.String">
+        select file_path
+        from file
+        where  uuid = #{uuid}
+        and is_deleted  = 0
+    </select>
+
+    <update id="updateDeleted">
+        update file
+        set is_deleted = #{isDeleted}
+        where uuid = #{uuid}
+    </update>
+</mapper>

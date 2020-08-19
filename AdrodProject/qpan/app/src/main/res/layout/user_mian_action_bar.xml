@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/local_download_icon"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:src="@drawable/user_mian_icon" />
+
+    <TextView
+        android:id="@+id/local_download"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="@string/mine"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_marginStart="20dp"
+        android:textSize="16sp">
+
+    </TextView>
+
+</LinearLayout>

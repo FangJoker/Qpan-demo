@@ -1,0 +1,11 @@
+server:
+  port: 8761
+eureka:
+  instance:
+    hostname: eureka-server
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+#      serviceUrl: http://localhost:8761/eureka/
+      serviceUrl: http://120.78.74.109/eureka/

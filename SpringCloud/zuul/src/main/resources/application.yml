@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: zuul-service
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  messages:
+    encoding: UTF-8
+
+eureka:
+  client:
+    service-url:
+#      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://120.78.74.109:8761/eureka/
+  instance:
+#    instance-id:  ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+    prefer-ip-address: true
+server:
+  port: 6069
+  #是否开启重试功能
+zuul:
+  retryable: true
+  #对当前服务的重试次数
+ribbon:
+  MaxAutoRetries: 2
+  #切换相同Server的次数
+  MaxAutoRetriesNextServer: 0
+
+q-pan:
+  md5_salt: "0F7F8645-3FD1-4A96-9E26-656F81EF2E55"
+  root_dir: "/var/qpan"
+  jwtToken:
+    key: qpan2020
+    expirationTime: 86400000 #24小时
+
+multipart:
+  maxFileSize: 2048MB
+  maxRequestSize: 10000MB
+uploadFolder: /var/qpan/

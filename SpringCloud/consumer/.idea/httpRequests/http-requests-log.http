@@ -1,0 +1,18 @@
+GET http://localhost:8200/getVerifyCode
+
+<> 2020-05-23T032347.500.xml
+
+###
+
+GET http://localhost:8200/getVerifyCode
+
+<> 2020-05-20T103526.500.xml
+
+###
+
+GET http://localhost:8200/getVerifyCode
+
+<> 2020-05-20T103514.500.xml
+
+###
+

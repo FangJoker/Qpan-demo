@@ -1,0 +1,50 @@
+server:
+  port: 8080
+  servlet:
+    context-path:
+  tomcat:
+    uri-encoding: UTF-8
+    max-http-header-size: 20000
+spring:
+  application:
+    name: user-service
+  main:
+    allow-bean-definition-overriding: true #当遇到同样名字的时候，是否允许覆盖注册
+  profiles:
+    active: native
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  messages:
+    encoding: UTF-8
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  #    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://120.78.74.109:8761/eureka/
+
+#mybatis配置
+# 单源数据库配置
+mybatis:
+  type-aliases-package: qpan.model
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  configLocation: classpath:mybatis/mybatis-config.xml
+
+q-pan:
+  md5_salt: "0F7F8645-3FD1-4A96-9E26-656F81EF2E55"
+  root_dir: "/var/qpan"
+  jwtToken:
+    key: qpan2020
+    expirationTime: 86400000 #24小时
+
+multipart:
+  maxFileSize: 2048MB
+  maxRequestSize: 10000MB
+uploadFolder: /var/qpan/
+
+

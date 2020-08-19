@@ -1,0 +1,29 @@
+server:
+  port: 8200
+  servlet:
+    context-path:
+  tomcat:
+    uri-encoding: UTF-8
+    max-http-header-size: 20000
+
+spring:
+  application:
+    name: qpan-consumer
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  messages:
+    encoding: UTF-8
+
+swagger:
+#    host:
+  host: 120.78.74.109/qpan/consumer
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://120.78.74.109:8761/eureka/

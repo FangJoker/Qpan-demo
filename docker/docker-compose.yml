@@ -1,0 +1,103 @@
+version: '2'
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    volumes:
+      - "/opt/compose/nginx/conf/:/etc/nginx/conf.d/"
+      - "/opt/compose/nginx/logs:/var/log/nginx"
+      - "/opt/compose/nginx/www/:/usr/share/nginx/html"
+    links: 
+      - qpan-client 
+      - eureka
+      - qpan-user-server
+      -  qpan-io-server
+      -  qpan-consumer
+      - zuul
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: always
+  db:
+    container_name: mysql5-7
+    image: mysql:5.7
+    volumes:
+      - "/opt/compose/mysql/:/var/lib/mysql"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: qiao1998
+      MYSQL_DATABASE: gogs
+      MYSQL_USER: group2
+      MYSQL_PASSWORD: 123465
+    ports:
+      - "3306:3306"
+  gogs:
+    container_name: gogs
+    depends_on:
+      - db
+    image: gogs/gogs
+    volumes:
+      - /opt/compose/gogs/:/data
+    links:
+      - db
+    ports:
+      - "3000:3000"
+      - "3022:22"
+    restart: always
+
+  qpan-client:
+    container_name: qpan-client
+    image: qpan:latest
+    volumes:
+      - "/var/qpan/:/var/qpan/"
+    restart: always   
+  
+  eureka:
+    container_name: eureka
+    image: eureka:latest
+    restart: always
+    ports:
+      - "8761:8761"
+   
+  zuul:
+    container_name: zuul
+    image: zuul:latest
+    restart: always
+    ports:
+      - "6069:6069"
+    
+  qpan-user-server:
+    container_name: qpan-user-server
+    image: qpan-user-server:latest
+    volumes:
+      - "/var/qpan/:/var/qpan/"
+    restart: always
+    ports:
+      - "8080:8080" 
+
+  qpan-io-server:
+    container_name: qpan-io-server
+    image: qpan-io-server:latest
+    restart: always
+    ports:
+      - "8090:8090"
+
+    
+  qpan-consumer:
+    container_name: qpan-consumer
+    image: qpan-consumer:latest
+    restart: always
+    ports:
+      - "8200:8200"
+
+  redis:
+    container_name: redis
+    image: redis:latest
+    restart: always
+    command: redis-server --requirepass qiao1998
+    ports:
+      - "6379:6379"
+
+
+
+         

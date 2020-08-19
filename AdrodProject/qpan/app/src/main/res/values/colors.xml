@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#5FA8FC</color>
+    <color name="colorPrimaryDark">#409EFF</color>
+    <color name="colorAccent">#ffffff</color>
+
+    <color name="buttonColor">#409EFF</color>
+    <color name="buttonTextColor">#ffffff</color>
+    <color name="white">#ffffff</color>
+    <color name="titleColor">#050505</color>
+    <color name="createTimeColor">#3D3D3D</color>
+    <color name="fileItemOnclick">#CECDCD</color>
+    <color name="menuBackground">#F2F6FC</color>
+    <color name="negativeBackground">#E4E7ED</color>
+    <color name="warningColor">#F10A0A</color>
+
+    <color name="menuText">#909399</color>
+
+    <color name="mainText">#303133</color>
+</resources>

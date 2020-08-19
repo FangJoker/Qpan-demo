@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/index_nav"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:visibility="visible">
+
+    <RelativeLayout
+        android:id="@+id/index_filelist_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/nav_shape"
+        android:layout_marginTop="2dp"
+        android:layout_weight="1"
+        android:padding="3dp">
+
+        <ImageView
+            android:id="@+id/index_filelist_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/file_list_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/index_filelist_icon"
+            android:layout_centerHorizontal="true"
+            android:text="文件"
+            android:layout_marginTop="2dp"
+            android:textSize="12dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/index_explore_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/nav_shape"
+        android:layout_marginTop="2dp"
+        android:layout_weight="1"
+        android:padding="3dp">
+
+        <ImageView
+            android:id="@+id/index_explore_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/explore_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/index_explore_icon"
+            android:layout_centerHorizontal="true"
+            android:text="发现"
+            android:layout_marginTop="2dp"
+            android:textSize="12dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/index_mine_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/nav_shape"
+        android:layout_marginTop="2dp"
+        android:layout_weight="1"
+        android:padding="3dp">
+
+        <ImageView
+            android:id="@+id/index_mine_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/mine_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/index_mine_icon"
+            android:layout_centerHorizontal="true"
+            android:text="我的"
+            android:layout_marginTop="2dp"
+            android:textSize="12dp" />
+    </RelativeLayout>
+
+</LinearLayout>

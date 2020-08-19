@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chavez.qpan.orm.mapper.ShareRecordMapper">
+    <insert id="insertShareRecord">
+        <selectKey keyProperty="uuid" resultType="String" order="BEFORE">
+            select replace(uuid(), '-', '') as uuid from dual
+        </selectKey>
+        insert into share_records
+        (uuid, file_uuid, user_uuid, link_uuid,create_time,update_time)
+        values (
+        #{uuid},
+        #{fileUuid},
+        #{userUuid},
+        #{linkUuid},
+        DATE_FORMAT(NOW(),"%Y-%m-%d %H:%i:%S"),
+        DATE_FORMAT(NOW(),"%Y-%m-%d %H:%i:%S")
+        )
+    </insert>
+
+    <select id="selectByFileUuid" resultType="cn.chavez.qpan.model.file.po.ShareRecordsPo">
+        select uuid,file_uuid,user_uuid,link_uuid,create_time,update_time,is_deleted
+         from share_records
+        where file_uuid = #{uuid}
+        and is_deleted = 0;
+    </select>
+    <select id="selectSharedResult" resultType="cn.chavez.qpan.model.file.vo.SharedFileVo">
+        select  sr.uuid, f.uuid,f.file_name, f.total_bytes,u.uuid as 'author_uuid', u.nick_name as 'author_name',f.file_type
+        from share_records sr
+        left join  file_link fl on sr.link_uuid = fl.uuid
+        left join  file f on fl.file_uuid = f.uuid
+        left join   user u on sr.user_uuid  = u.uuid
+        where #{key} = fl.link
+        and sr.is_deleted = 0
+        and fl.is_deleted = 0
+        order by sr.create_time DESC
+    </select>
+
+    <select id="selectShareFileUuidByShareRecordUuidAndPassWord" resultType="java.lang.String">
+        select sr.file_uuid
+        from share_records sr
+        left join file_link fl on fl.file_uuid = sr.file_uuid
+        where sr.uuid = #{uuid}
+        and  fl.password = #{passWord}
+        and sr.is_deleted = 0
+    </select>
+
+    <select id="selectSharedFileList" resultType="cn.chavez.qpan.model.user.vo.user.ShareFileListVo">
+         select fl.uuid, fl.status,fl.link, f.file_name as'title',f.file_type as 'type',s.update_time,u.account as 'author'
+         from  file_link fl
+         left join  file  f on   f.uuid = fl.file_uuid
+         left join share_records s on s.file_uuid = f.uuid
+         left join  user u on u.uuid = s.user_uuid
+    </select>
+</mapper>

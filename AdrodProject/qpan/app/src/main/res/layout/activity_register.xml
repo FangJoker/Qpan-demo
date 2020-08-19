@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_above="@+id/user_register_edit_text_layout"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_marginRight="5dp"
+            android:src="@mipmap/logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+        <TextView
+            android:text="@string/welcome_to_register"
+            android:textSize="25dp"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/mainText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+      <LinearLayout
+          android:id="@+id/user_register_edit_text_layout"
+          android:layout_centerInParent="true"
+          android:layout_marginLeft="30dp"
+          android:layout_marginRight="30dp"
+          android:layout_marginTop="10dp"
+          android:orientation="vertical"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+
+          <RelativeLayout
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+              <EditText
+                  android:background="@drawable/login_edittext_shape"
+                  android:id="@+id/register_account"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:lineHeight="8dp"
+                  android:padding="10dp"
+                  android:hint="输入手机号码" />
+
+              <TextView
+                  android:layout_alignEnd="@+id/register_account"
+                  android:layout_centerInParent="true"
+                  android:focusable="true"
+                  android:layout_marginEnd="5dp"
+                  android:id="@+id/register_get_verification_code_btn"
+                  android:text="@string/getVerificationCode"
+                  android:textColor="@color/buttonColor"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"/>
+          </RelativeLayout>
+
+          <EditText
+              android:background="@drawable/login_edittext_shape"
+              android:id="@+id/register_verification_code"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="10dp"
+              android:lineHeight="8dp"
+              android:padding="10dp"
+              android:hint="请输入验证码" />
+
+          <Button
+              android:id="@+id/register_action_btn"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_centerVertical="true"
+             android:layout_marginTop="20dp"
+              android:background="@drawable/btn_shape"
+              android:text="@string/registerAction"
+              android:textColor="@color/buttonTextColor" />
+      </LinearLayout>
+     <include layout="@layout/loading_view"/>
+
+</RelativeLayout>

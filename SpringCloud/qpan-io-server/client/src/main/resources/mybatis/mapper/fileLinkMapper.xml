@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chavez.qpan.orm.mapper.FileLinkMapper">
+
+    <insert id="insertNewFileLink">
+        <selectKey keyProperty="uuid" resultType="String" order="BEFORE">
+            select replace(uuid(), '-', '') as uuid from dual
+        </selectKey>
+        insert into file_link
+        (uuid,file_uuid,link,status,password,validity_date,create_time,update_time)
+        values (
+        #{uuid},
+        #{fileUuid},
+        #{link},
+        #{status},
+        #{password},
+        #{validityDate},
+        DATE_FORMAT(NOW(),"%Y-%m-%d %H:%i:%S"),
+        DATE_FORMAT(NOW(),"%Y-%m-%d %H:%i:%S")
+        )
+    </insert>
+
+    <update id="deleteFileLink">
+        update file_link
+        set is_deleted = #{isDeleted},update_time =  DATE_FORMAT(NOW(),"%Y-%m-%d %H:%i:%S")
+        where uuid = #{uuid}
+    </update>
+
+    <update id="updateLinkByUuid">
+        update file_link
+        set link = #{link}
+        where  uuid = #{uuid}
+    </update>
+
+    <update id="updateShareFileListStatus">
+        update file_link
+        set status =#{status}
+        where  uuid = #{uuid}
+    </update>
+
+</mapper>
